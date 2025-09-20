@@ -64,11 +64,11 @@ class TestTagGames(unittest.TestCase):
         self.assertFalse(result)
 
     def test_get_shift_delta(self):
-        self.assertEqual(self.game.get_shift_delta("w"), (1,0))
-        self.assertEqual(self.game.get_shift_delta("s"), (-1,0))
-        self.assertEqual(self.game.get_shift_delta("a"), (0,1))
-        self.assertEqual(self.game.get_shift_delta("d"), (0,-1))
-        self.assertEqual(self.game.get_shift_delta("x"), (None,None))
+        self.assertEqual(self.game.get_direction_by_input("w"), (1,0))
+        self.assertEqual(self.game.get_direction_by_input("s"), (-1,0))
+        self.assertEqual(self.game.get_direction_by_input("a"), (0,1))
+        self.assertEqual(self.game.get_direction_by_input("d"), (0,-1))
+        self.assertEqual(self.game.get_direction_by_input("x"), (None,None))
 
     def test_apply_shift(self):
         self.game.playing_field = [

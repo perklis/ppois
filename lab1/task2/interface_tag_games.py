@@ -11,7 +11,7 @@ class GameInterface:
         }
 
     def show_menu(self):
-        print("1 - Показать поле\n2 - Сделать ход (w/s/a/d)\n3 - Проверить решение\n")
+        print("1 - Показать поле\n2 - Сделать ход (w/s/a/d)\n3 - Проверить решение")
         print("4 - Создать новое поле\n0 - Выйти")
 
     def run(self):
@@ -25,11 +25,6 @@ class GameInterface:
                 action()
             else:
                 print("Нет такого выбора")
-
-    def print_field(self):
-        for row in self.playing_field:
-            print(self.format_row(row))
-        print()
 
     def show_field(self):
         self.game.print_field()    

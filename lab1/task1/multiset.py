@@ -165,32 +165,3 @@ class MultiSet:
         for key, value in self._elements.items():
             items.extend([key] * value)
         return "{" + ",".join(items) + "}"
-
-
-ms1 = MultiSet("{1,0,{2},{3}}")
-ms2 = MultiSet("{1,  5, {2,3}}")
-empty = MultiSet("{}")
-single = MultiSet("{x}")
-nested = MultiSet("{a,{b,{c}}}")
-print("Множество 1:", ms1)
-print("Множество 2:", ms2)
-print("Пустое множество:", empty)
-print("Один элемент множество:", single)
-print("Вложенное множество:", nested)
-
-print("Мощность ms1:", len(ms1))
-print("ms1 '1'?", '1' in ms1)
-print("ms1 '5'?", '5' in ms1)
-
-ms1.remove("3")
-print("После удаления '3':", ms1)
-ms1.remove("{3}")
-print("После удаления '{3}':", ms1)
-print("Объединение:", ms1.union_of_sets(ms2))
-print("Пересечение:", ms1.intersection_of_sets(ms2))
-print("Разность:", ms1.difference_of_sets(ms2))
-print("\nБулеан множества 1:")
-
-print(ms1.boolean_of_set())
-
-

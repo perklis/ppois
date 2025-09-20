@@ -26,15 +26,15 @@ class TagGame:
                 break
 
     def get_empty_cell_position(self):
-        flat = self.get_flat_list()
-        idx = flat.index(EMPTY_CELL)
-        return divmod(idx, FIELD_SIZE)
+        all_cells = self.get_list_from_matrix()
+        index = all_cells.index(EMPTY_CELL)
+        return divmod(index, FIELD_SIZE)
 
-    def get_flat_list(self):
+    def get_list_from_matrix(self):
         return [cell for row in self.playing_field for cell in row]
 
     def get_tiles_without_empty(self):
-        return [tile for tile in self.get_flat_list() if tile != EMPTY_CELL]
+        return [tile for tile in self.get_list_from_matrix() if tile != EMPTY_CELL]
 
     def count_inversions(self):
         tiles = self.get_tiles_without_empty()
@@ -56,33 +56,38 @@ class TagGame:
 
     def is_solved(self):
         expected = list(range(1, FIELD_SIZE * FIELD_SIZE)) + [EMPTY_CELL]
-        return self.get_flat_list() == expected
+        return self.get_list_from_matrix() == expected
 
     def move_cells(self, direction, steps):
-        delta_row, delta_col = self.get_shift_delta(direction)
-        if delta_row is None:
+        row_shift, col_shift = self.get_direction_by_input(direction)
+        if row_shift is None:
             return False
-        if not self.is_move_valid(delta_row, delta_col, steps):
+        if not self.is_move_valid(row_shift, col_shift, steps):
             return False
-        self.apply_shift(delta_row, delta_col, steps)
+        self.apply_shift(row_shift, col_shift, steps)
         return True
 
-    def get_shift_delta(self, direction):
-        mapping = {'w': (1, 0), 's': (-1, 0), 'a': (0, 1), 'd': (0, -1)}
-        return mapping.get(direction, (None, None))
+    def get_direction_by_input(self, direction):
+        directions = {'w': (1, 0), 's': (-1, 0), 'a': (0, 1), 'd': (0, -1)}
+        return directions.get(direction, (None, None))
 
-    def is_move_valid(self, delta_row, delta_col, steps):
+    def is_move_valid(self, row_shift, col_shift, steps):
         row, col = self.empty_cell_coordinates
-        new_row = row + delta_row * steps
-        new_col = col + delta_col * steps
+        new_row = row + row_shift * steps
+        new_col = col + col_shift * steps
         return 0 <= new_row < FIELD_SIZE and 0 <= new_col < FIELD_SIZE
+    
+    def print_field(self):
+        for row in self.playing_field:
+            print(self.format_row(row))
+        print()
 
-    def apply_shift(self, delta_row, delta_col, steps):
+    def apply_shift(self, row_shift, col_shift, steps):
         row, col = self.empty_cell_coordinates
         for _ in range(steps):
-            self.playing_field[row][col] = self.playing_field[row + delta_row][col + delta_col]
-            row += delta_row
-            col += delta_col
+            self.playing_field[row][col] = self.playing_field[row + row_shift][col + col_shift]
+            row += row_shift
+            col += col_shift
         self.playing_field[row][col] = EMPTY_CELL
         self.empty_cell_coordinates = (row, col)
 

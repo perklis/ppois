@@ -164,4 +164,5 @@ class MultiSet:
         items = []
         for key, value in self._elements.items():
             items.extend([key] * value)
+
         return "{" + ",".join(items) + "}"

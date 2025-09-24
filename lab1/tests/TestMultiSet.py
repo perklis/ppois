@@ -1,6 +1,6 @@
 import unittest
 
-from lab1.task1.multiset import MultiSet
+from lab1.task1.MultiSet import MultiSet
 
 
 class TestMultiSet(unittest.TestCase):

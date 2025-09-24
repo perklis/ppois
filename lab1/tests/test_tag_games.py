@@ -1,5 +1,5 @@
 import unittest
-from lab1.task2.tag_games import TagGame, EMPTY_CELL, FIELD_SIZE
+from lab1.task2.TagGame import TagGame, EMPTY_CELL, FIELD_SIZE
 
 class TestTagGames(unittest.TestCase):
 

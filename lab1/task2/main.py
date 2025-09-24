@@ -1,4 +1,4 @@
-from interface_tag_games import GameInterface
+from lab1.task2.GameInterface import GameInterface
 
 def main():
     GameInterface().run()

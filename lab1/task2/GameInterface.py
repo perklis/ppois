@@ -1,4 +1,4 @@
-from tag_games import TagGame
+from lab1.task2.TagGame import TagGame
 
 class GameInterface:
     def __init__(self):

@@ -25,7 +25,7 @@ class GameInterface:
                 action()
             else:
                 print("Нет такого выбора")
-
+    
     def show_field(self):
         self.game.print_field()    
 

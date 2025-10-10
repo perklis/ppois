@@ -4,9 +4,7 @@ from typing import Dict, List, Optional
 
 class CleaningSchedule:
     def __init__(self):
-        self.schedule: Dict[
-            str, Optional["Orderly"]
-        ] = {}  # {room_number: last_cleaned_by}
+        self.schedule: Dict[str, Optional["Orderly"]] = {}
         self.orderlies: List["Orderly"] = []
 
     def add_orderly(self, orderly: "Orderly"):

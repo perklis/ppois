@@ -6,8 +6,6 @@ from typing import List, Optional
 
 
 class SMM(Employee):
-    """Специалист по социальным медиа"""
-
     def __init__(
         self, job_title: str, name: str, age: int, work_experience: int, salary: float
     ):
@@ -18,14 +16,12 @@ class SMM(Employee):
         self.__instagram: Optional[Instagram] = None
 
     def connect_tiktok(self, account: Tiktok):
-        """Привязка TikTok-аккаунта"""
         self.__tiktok = account
-        return f"{self.name} connected TikTok account '{account.account_name}'."
+        return f"{self.name} connected TikTok account '{account.account_name}'"
 
     def connect_instagram(self, account: Instagram):
-        """Привязка Instagram-аккаунта"""
         self.__instagram = account
-        return f"{self.name} connected Instagram account '{account.account_name}'."
+        return f"{self.name} connected Instagram account '{account.account_name}'"
 
     def take_interview(self, doctor: Doctor, topic: str) -> str:
         self.__interviewed_doctors.append(doctor)
@@ -42,12 +38,12 @@ class SMM(Employee):
                 raise PermissionError("Instagram account not connected")
             result = self.__instagram._upload_post(self.name, content)
         else:
-            raise ValueError("Unknown platform.")
+            raise ValueError("Unknown platform")
 
         self.__posts_archive.append(content)
         return result
 
     def publish_story(self, content: str) -> str:
         if not self.__instagram:
-            raise PermissionError("Instagram not connected.")
+            raise PermissionError("Instagram not connected")
         return self.__instagram._upload_story(self.name, content)

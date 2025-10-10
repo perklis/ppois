@@ -6,7 +6,7 @@ class FoodItem:
 
     def reduce_quantity(self, amount: int):
         if amount > self.quantity:
-            raise ValueError(f"Недостаточно {self.name}")
+            raise ValueError(f"Not enough {self.name}")
         self.quantity -= amount
 
     def add_quantity(self, amount: int):

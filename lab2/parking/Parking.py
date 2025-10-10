@@ -9,10 +9,9 @@ class Parking:
         self.lot_name = lot_name
         self.total_spots = total_spots
         self.has_electric_charging = has_electric_charging
-        self.occupied_spots: Dict[int, Car] = {}  # spot_number -> Car
+        self.occupied_spots: Dict[int, Car] = {}
 
     def park_car(self, car: Car) -> Optional[int]:
-        """Park a car in the first available spot. Returns spot number if successful."""
         for spot in range(1, self.total_spots + 1):
             if spot not in self.occupied_spots:
                 self.occupied_spots[spot] = car
@@ -22,7 +21,6 @@ class Parking:
         return None
 
     def remove_car(self, spot_number: int):
-        """Remove a car from a specific spot."""
         if spot_number in self.occupied_spots:
             car = self.occupied_spots.pop(spot_number)
             print(f"{car.owner_name}'s car removed from spot {spot_number}")

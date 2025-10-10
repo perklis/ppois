@@ -14,7 +14,6 @@ class Paramedic(Employee):
         print(
             f"Paramedic {self.name} provided first aid to {patient.name} for {symptoms}"
         )
-        # Добавим запись в медкарту
         if hasattr(patient, "medical_card"):
             patient.medical_card.add_visit(
                 "Emergency", self.name, f"First aid for {symptoms}"

@@ -5,8 +5,6 @@ from buffet.FoodStock import FoodStock
 
 
 class BuffetWorker(Employee):
-    """Буфетчик без скидок, работает с объектами FoodItem"""
-
     def __init__(self, name: str, age: int, experience: int, salary: float):
         super().__init__("BuffetWorker", name, age, experience, salary)
         self.sales_total = 0
@@ -15,10 +13,10 @@ class BuffetWorker(Employee):
         self, stock: FoodStock, patient: Patient, item: FoodItem, quantity: int
     ):
         if not stock.check_stock(item, quantity):
-            raise ValueError(f"Недостаточно {item.name} на складе")
+            raise ValueError(f"Not enough {item.name}")
         price = stock.sell_item(item, quantity)
         self.sales_total += price
         print(
-            f"{self.name} продал {quantity} {item.name} пациенту {patient.name} за {round(price, 2)}₽"
+            f"{self.name} sells {quantity} {item.name} to patient {patient.name} price: {round(price, 2)}₽"
         )
         return price

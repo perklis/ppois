@@ -10,7 +10,6 @@ class Laborant(Employee):
         self.completed_tests: list[LabResult] = []
 
     def perform_test(self, patient, lab_test: LabTest):
-        """Выполнить анализ и сохранить результат"""
         card = patient.get_medical_card()
         result = LabResult(
             patient.name,

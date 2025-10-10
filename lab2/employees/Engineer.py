@@ -26,12 +26,12 @@ class Engineer(Employee):
 
     def check_equipment(self, equipment: Equipment) -> str:
         if equipment not in self.__equipment_list:
-            return f"{self.name} is not assigned to {equipment.name}"
+            return f"{self.name} isn't assigned to {equipment.name}"
         return equipment.mark_checked(self.name)
 
     def repair_equipment(self, equipment: Equipment) -> str:
         if equipment not in self.__equipment_list:
-            return f"{self.name} can't repair {equipment.name} — not assigned"
+            return f"{self.name} can't repair {equipment.name}"
         if equipment.condition == "Working":
             return f"{equipment.name} is already working"
         return equipment.repair()

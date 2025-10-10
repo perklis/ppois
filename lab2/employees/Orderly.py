@@ -51,16 +51,15 @@ class Orderly(Employee):
             self.schedule.mark_cleaned(room_number, self)
 
     def mark_trained(self, topic: str, instructor_name: Optional[str] = None):
-        """Called by HygieneInstructor — marks training completion."""
         self._trained_topics.append(topic)
         self._last_instructor = instructor_name
         print(
-            f"{self.name} completed hygiene training on '{topic}'"
+            f"{self.name} completed hygienist training on '{topic}'"
             + (f" (Instructor: {instructor_name})" if instructor_name else "")
         )
 
     def get_training_info(self) -> str:
         if not self._trained_topics:
-            return f"{self.name} has not completed any hygiene training yet."
+            return f"{self.name} has not completed any hygiene training"
         topics = ", ".join(self._trained_topics)
-        return f"{self.name} has completed training on: {topics}."
+        return f"{self.name} has completed trainings {topics}"

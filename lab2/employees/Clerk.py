@@ -32,6 +32,5 @@ class Clerk(Employee):
             print(f"Task '{task}' not found for {self.name}")
 
     def receive_report(self, specialist: ProcurementSpecialist):
-        """Получить отчет от специалиста по закупкам напрямую от объекта"""
         report = specialist.generate_report()
-        print(f"Report received by {self.name}:\n{report}")
+        print(f"Report by {self.name}:\n{report}")

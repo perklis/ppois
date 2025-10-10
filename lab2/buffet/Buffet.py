@@ -5,8 +5,6 @@ from patients.Patient import Patient
 
 
 class Buffet:
-    """Буфет с продажами и проверкой склада, работает с объектами FoodItem"""
-
     def __init__(self, stock: FoodStock, worker: BuffetWorker):
         self.stock = stock
         self.worker = worker

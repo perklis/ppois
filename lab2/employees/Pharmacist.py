@@ -14,7 +14,7 @@ class Pharmacist(Employee):
 
     def dispense_medication(self, medication_name: str, quantity: int) -> str:
         if self._inventory.get_quantity(medication_name) < quantity:
-            return f"Not enough {medication_name} in stock"
+            return f"Not enough {medication_name}"
         self._inventory.remove_medication(medication_name, quantity)
         return f"{quantity} pcs of {medication_name} dispensed"
 
@@ -23,10 +23,10 @@ class Pharmacist(Employee):
         return f"{medication.quantity} pcs of {medication.name} added to inventory"
 
     def generate_inventory_report(self) -> str:
-        meds = [
-            f"{m.name}: {m.quantity} {m.unit}"
-            for m in self._inventory._medications.values()
+        medicaments = [
+            f"{meds.name}: {meds.quantity} {meds.unit}"
+            for meds in self._inventory._medications.values()
         ]
-        if not meds:
+        if not medicaments:
             return "Inventory is empty"
-        return "Inventory Report:\n" + "\n".join(meds)
+        return "Inventory Report:\n" + "\n".join(medicaments)

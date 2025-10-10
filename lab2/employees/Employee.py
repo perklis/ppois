@@ -17,10 +17,9 @@ class Employee:
 
     def add_experience(self, years: int = 1):
         self.work_experience += years
-        return f"Стаж {self.name} увеличен до {self.work_experience} лет."
+        return f"Work expirience {self.name} increases to {self.work_experience} years"
 
     def get_salary(self) -> float:
-        """Сотрудник может узнать свою зарплату"""
         return self.__salary
 
     def _set_salary(self, value: float):

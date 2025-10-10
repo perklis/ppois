@@ -27,7 +27,6 @@ class Doctor(Employee):
         self.schedule = schedule
 
     def add_patient(self, patient: Patient):
-        """Добавить пациента в список (например после приёма)"""
         if patient not in self._patients:
             self._patients.append(patient)
 
@@ -38,7 +37,6 @@ class Doctor(Employee):
         diagnosis: str,
         prescriptions: list[str] = None,
     ):
-        """Доктор ставит диагноз и записывает его в медкарту"""
         if patient not in self._patients:
             raise PermissionError(
                 f"Patient {patient.name} is not registered with Dr. {self.name}"
@@ -54,7 +52,7 @@ class Doctor(Employee):
         prescriptions: list[str] = None,
     ):
         if not self.schedule:
-            raise ValueError("Doctor has no schedule assigned")
+            raise ValueError("Doctor hasn't schedule")
 
         talon = self.schedule.get_talon(patient, date, time_str)
         self.add_patient(patient)

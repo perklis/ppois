@@ -41,7 +41,5 @@ class ParkingWorker(Employee):
         return free
 
     def reset_cars_served(self):
-        print(
-            f"{self.name} served {self._cars_served_today} cars today. Resetting counter."
-        )
+        print(f"{self.name} served {self._cars_served_today} cars today")
         self._cars_served_today = 0

@@ -1,12 +1,62 @@
-from dataclasses import dataclass
-from Employee import Employee
-from typing import List, Dict
+from patients.Patient import Patient
+from schedule.DoctorSchedule import DoctorSchedule
+from employees.Employee import Employee
+from typing import List
 
-@dataclass
+
 class Doctor(Employee):
-    cabinet_number:int
-    specialisation: str
-    department: str
-    _patients: List[Doctor.patients]=[]
-    
-    def add_patient(self, patient_name:str, diagnosis:str, addres:str)
+    def __init__(
+        self,
+        job_title: str,
+        name: str,
+        age: int,
+        work_experience: int,
+        salary: float,
+        specialisation: str,
+        department: str,
+    ):
+        super().__init__(job_title, name, age, work_experience, salary)
+        self.specialisation = specialisation
+        self.department = department
+        self._patients: List[Patient] = []
+        self.schedule: DoctorSchedule | None = None
+
+    def set_schedule(self, schedule: DoctorSchedule):
+        if schedule.doctor != self:
+            raise ValueError("Schedule does not belong to this doctor")
+        self.schedule = schedule
+
+    def add_patient(self, patient: Patient):
+        """Добавить пациента в список (например после приёма)"""
+        if patient not in self._patients:
+            self._patients.append(patient)
+
+    def add_diagnosis(
+        self,
+        patient: Patient,
+        date: str,
+        diagnosis: str,
+        prescriptions: list[str] = None,
+    ):
+        """Доктор ставит диагноз и записывает его в медкарту"""
+        if patient not in self._patients:
+            raise PermissionError(
+                f"Patient {patient.name} is not registered with Dr. {self.name}"
+            )
+        patient.medical_card.add_visit(date, self.name, diagnosis, prescriptions)
+
+    def see_patient(
+        self,
+        patient: Patient,
+        date: str,
+        time_str: str,
+        diagnosis: str,
+        prescriptions: list[str] = None,
+    ):
+        if not self.schedule:
+            raise ValueError("Doctor has no schedule assigned")
+
+        talon = self.schedule.get_talon(patient, date, time_str)
+        self.add_patient(patient)
+        patient.medical_card.add_visit(date, self.name, diagnosis, prescriptions)
+        return talon

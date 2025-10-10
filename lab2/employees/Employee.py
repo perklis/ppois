@@ -1,11 +1,27 @@
-from dataclasses import dataclass
-
-@dataclass
 class Employee:
-    job_title: str
-    name: str
-    age: int
-    work_experience: int
+    def __init__(
+        self, job_title: str, name: str, age: int, work_experience: int, salary: float
+    ):
+        self.job_title = job_title
+        self.name = name
+        self.age = age
+        self.work_experience = work_experience
+        self.__salary = 0.0
 
     def get_information(self) -> str:
-        return f"{self.__class__.__name__}:\n Position:{self.job_title} {self.name}, Age: {self.age}, Work length: {self.work_experience}"
+        return (
+            f"{self.__class__.__name__}:\nPosition: {self.job_title}\n"
+            f"Name: {self.name}\nAge: {self.age}\n"
+            f"Work length: {self.work_experience} years"
+        )
+
+    def add_experience(self, years: int = 1):
+        self.work_experience += years
+        return f"Стаж {self.name} увеличен до {self.work_experience} лет."
+
+    def get_salary(self) -> float:
+        """Сотрудник может узнать свою зарплату"""
+        return self.__salary
+
+    def _set_salary(self, value: float):
+        self.__salary = value

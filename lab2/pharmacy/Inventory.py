@@ -1,4 +1,5 @@
 from pharmacy.Medication import Medication
+from exceptions import NotEnoughItemError, ItemNotFound
 
 
 class Inventory:
@@ -13,9 +14,9 @@ class Inventory:
 
     def remove_medication(self, medication_name: str, quantity: int):
         if medication_name not in self._medications:
-            raise ValueError(f"Medication {medication_name} not found")
+            raise ItemNotFound(f"Medication {medication_name} not found")
         if self._medications[medication_name].quantity < quantity:
-            raise ValueError(f"Not enough {medication_name} in stock")
+            raise NotEnoughItemError(f"Not enough {medication_name} in stock")
         self._medications[medication_name].quantity -= quantity
         if self._medications[medication_name].quantity == 0:
             del self._medications[medication_name]

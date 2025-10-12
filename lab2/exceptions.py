@@ -1,0 +1,43 @@
+class HeadException(Exception):
+    def __init__(self, msg: str) -> None:
+        super().__init__(msg)
+        self.msg: str = msg
+
+
+class NoMedicalCardError(HeadException): ...
+
+
+class NotEnoughItemError(HeadException): ...
+
+
+class ItemNotFound(HeadException): ...
+
+
+class DoctorScheduleError(HeadException): ...
+
+
+class NoPharmacistAssignedError(HeadException): ...
+
+
+class SocialMediaConnectError(HeadException): ...
+
+
+class TalonTakingError(HeadException): ...
+
+
+class NoFreeSpotError(HeadException): ...
+
+
+class CarNotFoundError(HeadException): ...
+
+
+class GuardNotFound(HeadException): ...
+
+
+class GuardAlreadyExistsError(HeadException): ...
+
+
+class InvalidGuardTypeError(HeadException): ...
+
+
+class ReportTypeError(HeadException): ...

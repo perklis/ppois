@@ -2,6 +2,7 @@ from employees.Employee import Employee
 from patients.Patient import Patient
 from buffet.FoodItem import FoodItem
 from buffet.FoodStock import FoodStock
+from exceptions import NotEnoughItemError
 
 
 class BuffetWorker(Employee):
@@ -13,7 +14,7 @@ class BuffetWorker(Employee):
         self, stock: FoodStock, patient: Patient, item: FoodItem, quantity: int
     ):
         if not stock.check_stock(item, quantity):
-            raise ValueError(f"Not enough {item.name}")
+            raise NotEnoughItemError(f"Not enough {item.name}")
         price = stock.sell_item(item, quantity)
         self.sales_total += price
         print(

@@ -13,7 +13,7 @@ class Tiktok:
     def _get_stats(self) -> str:
         return (
             f"TikTok ({self.account_name}): {len(self.__posts)} posts, "
-            f"{self.__likes} likes, {self.__followers} followers."
+            f"{self.__likes} likes, {self.__followers} followers"
         )
 
     def get_public_info(self) -> str:

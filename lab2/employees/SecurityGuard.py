@@ -5,8 +5,10 @@ from equipment.Equipment import Equipment
 
 
 class SecurityGuard(Employee):
-    def __init__(self, name: str, age: int, work_experience: int, shift_type: str):
-        super().__init__("Security Guard", name, age, work_experience)
+    def __init__(
+        self, name: str, age: int, work_experience: int, shift_type: str, salary: float
+    ):
+        super().__init__("Security Guard", name, age, work_experience, salary)
         self.shift_type = shift_type
         self.__on_duty = False
 
@@ -22,15 +24,12 @@ class SecurityGuard(Employee):
         return self.__on_duty
 
     def report_incident(self, description: str) -> SecurityReport:
-        report = SecurityReport(self.name, description)
-        return report
+        return SecurityReport(self.name, description)
 
     def notify_engineer(self, engineer: Engineer, equipment: Equipment) -> str:
         if equipment.condition == "Broken":
-            return (
-                f"{self.name} reported {equipment.name} to engineer {engineer.name}\n"
-                + engineer.repair_equipment(equipment)
-            )
+            repair_message = engineer.repair_equipment(equipment)  # реально чинит
+            return f"{self.name} reported {equipment.name} to engineer {engineer.name}\n{repair_message}"
         return f"{equipment.name} is working fine, no report needed"
 
     def __str__(self):

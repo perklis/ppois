@@ -1,5 +1,7 @@
+from __future__ import annotations
 from datetime import datetime
 from typing import Optional
+from exceptions import TalonTakingError  # оставляем кастомное исключение
 
 
 class Talon:
@@ -12,7 +14,7 @@ class Talon:
 
     def add_an_appointment(self, patient: "Patient"):
         if self.is_taken:
-            raise ValueError(
+            raise TalonTakingError(
                 f"Talon for {self.date} {self.time.strftime('%H:%M')} doctor: {self.doctor.name} is taken"
             )
         self.patient = patient

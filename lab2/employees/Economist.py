@@ -10,9 +10,10 @@ class Economist(Employee):
         age: int,
         work_experience: int,
         department: str,
-        monthly_budget=60000,
+        salary: float = 0.0,
+        monthly_budget: float = 60000,
     ):
-        super().__init__("Economist", name, age, work_experience)
+        super().__init__("Economist", name, age, work_experience, salary)
         self.department = department
         self.monthly_budget = monthly_budget
         self.processed_employees: List[Employee] = []
@@ -31,23 +32,23 @@ class Economist(Employee):
         while total > self.monthly_budget:
             iteration += 1
             for emp in employees:
-                reduced_salary = emp.salary * 0.99
+                reduced_salary = emp.get_salary() * 0.99
                 emp._set_salary(reduced_salary)
-            total = sum(emp.salary for emp in employees)
+            total = sum(emp.get_salary() for emp in employees)
             if iteration > 100:
                 break
 
         print(
-            f"{self.name} adjusted salaries to fit the budget: {self.monthly_budget}.\n Total after adjustment: {total}"
+            f"{self.name} adjusted salaries to fit the budget: {self.monthly_budget}.\nTotal: {total}"
         )
 
     def calculate_all_salaries(self, employees: List[Employee]) -> float:
         for emp in employees:
             self.calculate_salary(emp)
-        total_salaries = sum(emp.salary for emp in employees)
+        total_salaries = sum(emp.get_salary() for emp in employees)
 
         if total_salaries > self.monthly_budget:
             self.adjust_salaries_to_budget(employees)
-            total_salaries = sum(emp.salary for emp in employees)
+            total_salaries = sum(emp.get_salary() for emp in employees)
 
         return total_salaries

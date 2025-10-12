@@ -1,4 +1,3 @@
-# employees/ProcurementSpecialistPharmacy.py
 from employees.Employee import Employee
 from pharmacy.Pharmacy import Pharmacy
 from pharmacy.Medication import Medication
@@ -20,7 +19,7 @@ class ProcurementSpecialist(Employee):
 
     def monthly_procurement(self, pharmacy: Pharmacy):
         for pharmacist in pharmacy.pharmacists:
-            inventory = pharmacist.inventory
+            inventory = pharmacist._inventory
             for med_name in inventory._medications.keys():
                 self._order_medication(inventory, med_name, 40)
             common_meds = ["Paracetamol", "Ibuprofen", "Acyclovir"]

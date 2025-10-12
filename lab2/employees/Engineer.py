@@ -1,5 +1,6 @@
 from employees.Employee import Employee
 from equipment.Equipment import Equipment
+from typing import List
 
 
 class Engineer(Employee):
@@ -10,11 +11,12 @@ class Engineer(Employee):
         work_experience: int,
         specialization: str,
         department: str,
+        salary: float,
     ):
-        super().__init__("Engineer", name, age, work_experience)
+        super().__init__("Engineer", name, age, work_experience, salary)
         self.specialization = specialization
         self.department = department
-        self.__equipment_list: list[Equipment] = []
+        self.__equipment_list: List[Equipment] = []
 
     def add_equipment(self, equipment: Equipment) -> str:
         if not isinstance(equipment, Equipment):
@@ -44,5 +46,5 @@ class Engineer(Employee):
     def __str__(self):
         return (
             f"Engineer {self.name}, specialization: {self.specialization}, "
-            f"department: {self.department},amount of equipment: {len(self.__equipment_list)}"
+            f"department: {self.department}, amount of equipment: {len(self.__equipment_list)}"
         )

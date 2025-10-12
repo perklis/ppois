@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from schedule.Talon import Talon
 from employees.Doctor import Doctor
 from patients.Patient import Patient
+from exceptions import TalonTakingError
 
 
 class Schedule:
@@ -37,12 +38,12 @@ class Schedule:
                 and slot.doctor == doctor
             ):
                 if slot.booked:
-                    raise ValueError(
-                        f"Талон {date} {time_str} у {doctor.name} уже занят"
+                    raise TalonTakingError(
+                        f"Talon {date} {time_str} doc: {doctor.name} is already taken"
                     )
                 slot.book(patient)
                 return slot
-        raise ValueError(f"Талон на {date} {time_str} у {doctor.name} не найден")
+        raise TalonTakingError(f"Talon {date} {time_str} doc: {doctor.name} not found")
 
     def get_doctor_schedule(self, doctor: Doctor) -> list[Talon]:
         return [s for s in self.slots if s.doctor == doctor]

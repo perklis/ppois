@@ -1,4 +1,5 @@
 from buffet.FoodItem import FoodItem
+from exceptions import NotEnoughItemError, ItemNotFound
 
 
 class FoodStock:
@@ -13,10 +14,10 @@ class FoodStock:
 
     def sell_item(self, item: FoodItem, quantity: int) -> float:
         if item.name not in self.items:
-            raise ValueError(f"{item.name} not in stock")
+            raise ItemNotFound(f"{item.name} not in stock")
         stock_item = self.items[item.name]
         if quantity > stock_item.quantity:
-            raise ValueError(f"Not enough {item.name}")
+            raise NotEnoughItemError(f"Not enough {item.name}")
         stock_item.reduce_quantity(quantity)
         if stock_item.quantity == 0:
             del self.items[item.name]

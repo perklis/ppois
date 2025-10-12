@@ -23,7 +23,7 @@ class LabResult:
         try:
             limit = int(self.normal_range.split()[-1])
             status = "Normal" if self.value <= limit else "Above normal"
-        except:
+        except ValueError:
             status = "Impossible to identify"
         return f"{self.test_name}: {self.value} {self.units} ({status})"
 

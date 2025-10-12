@@ -1,14 +1,18 @@
 from datetime import datetime
 
+
 class Equipment:
     def __init__(self, name: str, serial_number: str, condition: str = "Working"):
         self.name = name
         self.serial_number = serial_number
-        self.condition = condition  
+        self.condition = condition
         self.__last_checked_by = None
 
     def mark_checked(self, engineer_name: str):
-        self.__last_checked_by = (engineer_name, datetime.now().strftime("%Y-%m-%d %H:%M"))
+        self.__last_checked_by = (
+            engineer_name,
+            datetime.now().strftime("%Y-%m-%d %H:%M"),
+        )
         return f"{self.name} checked by {engineer_name}"
 
     def repair(self):

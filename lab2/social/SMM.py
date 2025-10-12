@@ -3,6 +3,7 @@ from social.TikTok import Tiktok
 from social.Instagram import Instagram
 from employees.Doctor import Doctor
 from typing import List, Optional
+from exceptions import SocialMediaConnectError
 
 
 class SMM(Employee):
@@ -31,11 +32,11 @@ class SMM(Employee):
     def publish_post(self, platform: str, content: str) -> str:
         if platform.lower() == "tiktok":
             if not self.__tiktok:
-                raise PermissionError("TikTok account not connected")
+                raise SocialMediaConnectError("TikTok account not connected")
             result = self.__tiktok._upload_post(self.name, content)
         elif platform.lower() == "instagram":
             if not self.__instagram:
-                raise PermissionError("Instagram account not connected")
+                raise SocialMediaConnectError("Instagram account not connected")
             result = self.__instagram._upload_post(self.name, content)
         else:
             raise ValueError("Unknown platform")
@@ -45,5 +46,5 @@ class SMM(Employee):
 
     def publish_story(self, content: str) -> str:
         if not self.__instagram:
-            raise PermissionError("Instagram not connected")
+            raise SocialMediaConnectError("Instagram not connected")
         return self.__instagram._upload_story(self.name, content)

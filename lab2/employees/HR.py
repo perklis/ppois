@@ -38,7 +38,7 @@ class HR(Employee):
             return f"Candidate {candidate_name} is too young for employment"
         if candidate_experience < 2:
             return f"Candidate {candidate_name} has insufficient experience"
-        return f"Candidate {candidate_name} passed the interview successfully!"
+        return f"Candidate {candidate_name} passed the interview"
 
     def __str__(self):
         return f"HR {self.name}\nexperience: {self.work_experience} years"

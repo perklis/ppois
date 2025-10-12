@@ -63,7 +63,7 @@ class Nurse(Employee):
         if patient not in self._patient_records:
             return f"Nurse {self.name} cannot issue referral: {patient.name} has not been admitted yet"
 
-        laboratory.issue_referral(patient, test_name)
+        laboratory.issue_referral(patient.name, test_name)
         return f"Nurse {self.name} issued referral for {patient.name} to {test_name}."
 
     def view_patient_reports(self, patient: Patient) -> str:

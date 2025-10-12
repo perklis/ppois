@@ -1,5 +1,6 @@
 from typing import Dict, List, Optional
 from parking.Car import Car
+from exceptions import NoFreeSpotError, CarNotFoundError
 
 
 class Parking:
@@ -17,15 +18,13 @@ class Parking:
                 self.occupied_spots[spot] = car
                 print(f"{car.owner_name}'s car parked at spot {spot}")
                 return spot
-        print(f"No available spots to park {car.owner_name}'s car")
-        return None
+        raise NoFreeSpotError(f"No available spots to park {car.owner_name}'s car")
 
     def remove_car(self, spot_number: int):
-        if spot_number in self.occupied_spots:
-            car = self.occupied_spots.pop(spot_number)
-            print(f"{car.owner_name}'s car removed from spot {spot_number}")
-        else:
-            print(f"No car found at spot {spot_number}")
+        if spot_number not in self.occupied_spots:
+            raise CarNotFoundError(f"No car found at spot {spot_number}")
+        car = self.occupied_spots.pop(spot_number)
+        print(f"{car.owner_name}'s car removed from spot {spot_number}")
 
     def get_free_spots(self) -> List[int]:
         return [

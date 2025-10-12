@@ -1,6 +1,7 @@
 from patients.Patient import Patient
 from employees.Doctor import Doctor
 from patients.Sickness import Sickness
+from exceptions import NoMedicalCardError
 
 
 class EmergencyRoom:
@@ -18,17 +19,20 @@ class EmergencyRoom:
             print("No patient in the ER.")
             return
         if (
-            not hasattr(self.current_patient, "medical_card")
-            or self.current_patient.medical_card is None
+            not hasattr(self.current_patient, "_Patient__medical_card")
+            or self.current_patient._Patient__medical_card is None
         ):
-            raise AttributeError(
+            raise NoMedicalCardError(
                 f"Patient {self.current_patient.name} has no medical card"
             )
 
+        medical_card = self.current_patient.get_medical_card()
+
         sickness = Sickness(diagnosis, ["pain", "fever"], severity)
-        self.current_patient.medical_card.add_sickness(sickness)
+        medical_card.add_sickness(sickness)
         self.doctor.add_patient(self.current_patient)
         self.doctor.add_diagnosis(self.current_patient, "Emergency", diagnosis)
+
         print(
             f"Doctor {self.doctor.name} treated {self.current_patient.name} for {diagnosis}"
         )

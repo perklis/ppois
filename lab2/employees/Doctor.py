@@ -2,6 +2,7 @@ from patients.Patient import Patient
 from schedule.DoctorSchedule import DoctorSchedule
 from employees.Employee import Employee
 from typing import List
+from exceptions import DoctorScheduleError
 
 
 class Doctor(Employee):
@@ -23,7 +24,7 @@ class Doctor(Employee):
 
     def set_schedule(self, schedule: DoctorSchedule):
         if schedule.doctor != self:
-            raise ValueError("Schedule does not belong to this doctor")
+            raise DoctorScheduleError("Schedule does not belong to this doctor")
         self.schedule = schedule
 
     def add_patient(self, patient: Patient):
@@ -38,7 +39,7 @@ class Doctor(Employee):
         prescriptions: list[str] = None,
     ):
         if patient not in self._patients:
-            raise PermissionError(
+            raise DoctorScheduleError(
                 f"Patient {patient.name} is not registered with Dr. {self.name}"
             )
         patient.medical_card.add_visit(date, self.name, diagnosis, prescriptions)
@@ -52,9 +53,9 @@ class Doctor(Employee):
         prescriptions: list[str] = None,
     ):
         if not self.schedule:
-            raise ValueError("Doctor hasn't schedule")
-
-        talon = self.schedule.get_talon(patient, date, time_str)
+            raise DoctorScheduleError("Doctor hasn't schedule")
+        talon = self.schedule.book_talon(patient, date, time_str)
         self.add_patient(patient)
         patient.medical_card.add_visit(date, self.name, diagnosis, prescriptions)
+
         return talon

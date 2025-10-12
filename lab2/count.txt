@@ -1,0 +1,55 @@
+Employee 5 4 -> 
+Doctor 4 4      -> Patient, DoctorSchedule
+Nurse 2 4       -> Patient, Sickness, Laboratory
+HR 1 4      -> Employee
+Engineer 3 4    -> Equipment
+HeadPhysician 1 7   -> Doctor, Economist, Lawyer, SecurityDepartment
+Lawyer 2 3
+Registrator 1 1     -> Patient, MedicalCardsArchive, MedicalCard, DoctorSchedule, AppointmentQueue
+Orderly 5 5     -> CleaningSchedule
+Economist 3 3   -> Employee
+Analysis 4 4
+MedicalCard 9 7     -> Analysis, Sickness, Prescription, MedicalCardGenerator
+Patient 7 4     -> MedicalCard
+Prescription 4
+Sickness 3 0
+MedicalCardGenerator 2 1
+MedicalCardsArchive 1 3     ->MedicalCard
+DoctorSchedule 2 4  -> Doctor, Talon, Patient
+Schedule 1 4    -> Doctor, Talon, Patient
+Talon 5 1   -> Doctor, Patient
+Ambulance 4 3   -> Paramedic, EmergencyCall
+EmergencyCall 4 2   -> Patient
+EmergencyRoom 3 2   -> Patient, Doctor, Sickness
+Paramedic 1 2   -> Patient, Ambulance
+Laborant 1 2    -> LabResult, LabTest
+Pharmacist 1 4  -> Inventory, Medication
+Laboratory 3 0  -> Laborant, LabTest
+LabResult 7 0   -> Analysis
+LabTest 3 0
+Inventory 1 0   -> Medication
+Medication 4 0
+Pharmacy 2 5    -> Pharmacist, Medication
+SecurityDepartment 3 6  -> SecurityGuard, SecurityReport
+SecurityReport 3 0
+SecurityGuard 2 5   -> SecurityReport, Engineer, Equipment
+Equipment 4 0
+AppointmentQueue 1 5    -> Talon, Patient
+FoodItem 3 3    ->
+FoodStock 1 4   -> FoodItem
+BuffetWorker 1 1    -> FoodStock
+Buffet 2 3  -> FoodItem, FoodStock, Patient, BuffetWorker
+SMM 4 5     -> TikTok, Instagram, Doctor
+TikTok 4 3
+Instagram 3 3
+CleaningSchedule 2 3    -> Orderly
+Car 4 0
+Parking 4 4     -> Car
+Clerk 3 3   -> ProcurementSpecialist
+ProcurementSpecialist 2 3   -> Pharmacy, Medication
+ParkingWorker 3 4   -> Parking, Car
+Hygienist 4 2   -> Orderly
+
+
+Поля: 151  Методы: 144 
+Ассоциации: 73

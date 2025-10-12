@@ -20,8 +20,11 @@ class Patient:
         self.__medical_card: Optional[MedicalCard] = None
         self.__assigned_doctor = None
 
+    @property
+    def medical_card(self):
+        return self.__medical_card
+
     def assign_medical_card(self, card: MedicalCard):
-        """Назначить медкарту"""
         from patients.MedicalCard import MedicalCard
 
         if not isinstance(card, MedicalCard):

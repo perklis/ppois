@@ -1,0 +1,69 @@
+DeliveryEstimator.py 2 3        -> Weather, QueueBeforOrder, Order, Courier
+DeliveryZone.py 1 4             ->
+Delivery.py 3 3                 -> Courier, Order, DeliveryEstimator
+DeliveryEmployee.py 7 5         ->
+Courier.py 5 3                  -> CourierRating
+Vehicle.py 2 1                  ->
+OrdersList.py 1 4               -> Order
+CourierRating.py 2 3            -> Courier, Order
+Order.py 9 6                    -> OrderItem, OrderStatus, Payment, DeliveryZone, PaymentBy
+QueueBeforOrder.py 1 4          -> Order
+OrderStatus.py 4 0              -> 
+OrderItem.py 3 2                -> FoodItem
+PromocodeGenerator.py 2 4       ->
+LoyaltyCardGenerator.py 1 1     ->
+Promocode.py 3 3                -> PromocodeGenerator, LoyaltyCard
+Cashback.py 1 2                 ->
+GiftCard.py 3 1                 ->
+LoyaltyCard.py 2 4              ->
+Payment.py 8 5                  -> PaymentBy, PaymentStatus, Tip, Transaction, Receipt
+Receipt.py 3 1                  -> Payment
+PaymentStatus.py 4 0            ->
+Tip.py 1 0                      ->
+PaymentBy.py 4 0                ->
+Transaction.py 6 1              -> PaymentBy
+DeliveryAdministrator.py 1 3    -> Promocode, LoyaltyCard
+CallCenter.py 1 2               -> Client, DeliveryZone, Order, OrderItem, PaymentBy
+IssueReport.py 5 2              -> Order, Client
+SupportService.py 1 3           -> IssueReport
+Menu.py 2 7                     -> DishCategory, FoodItem
+Picker.py 3 4                   -> FoodItem, Courier
+Inventory.py 1 4                -> 
+RestaurantRating.py 1 2         -> Order
+FoodItem.py 6 3                 -> DishCategory, Inventory
+Workingtime.py 3 2              ->
+RestaurantAdministrator.py 3 2  -> Cashback
+Restaurant.py 10 8              -> Menu, OrderQueue, RestaurantRating, Workingtime, RestaurantAnalytics, Cook, Shef, Picker, Courier, Client
+Packaging.py 4 5                -> DishCategory
+RestaurantEmployee.py 5 4       ->
+Shef.py 2 4                     -> FoodItem, DishCategory, Inventory
+OrderQueue.py 1 4               -> Order, Courier
+RestaurantAnalytics.py 1 3      -> Order
+DishCategory.py 3 5             -> FoodItem
+Cook.py 2 2                     -> FoodItem, Inventory
+Cleaner.py 2 4                  ->
+Weather.py 1 2                  ->
+Review.py 6 1                   -> Order, Client, IssueReport
+Recomendations.py 1 1           -> HistoryOfOrders
+HistoryOfOrders.py 2 5          -> Order
+Client.py 7 14                  -> HistoryOfOrders, Client, GiftCard, Menu, DeliveryZone, Order,OrderItem, PaymentBy, Addres
+Addres.py 3 1                   ->
+
+Классов: 50
+Полей: 155
+Методов: 157
+Ассоциации: 79
+
+Персональные исключения: 12
+1. NotEnoughInStock
+2. InvalidPromocode
+3. AdressNotInDeliveryZone
+4. EmptyClientWishlistError
+5. OrderNotFound
+6. CleaningError
+7. GiftCardNotFound
+8. RatingInputError
+9. EmptyOrderQueue
+10. CouriersNotFound
+11. RatingTypeError
+12. DishesNotFoundError

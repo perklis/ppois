@@ -68,7 +68,6 @@ class DoctorWindow(QWidget):
             QMessageBox.information(self, "Сохранено", f"Заметка для {patient_name} сохранена!")
             self.note_edit.clear()
         if prescription:
-            # Добавляем рецепт в словарь
             PRESCRIPTIONS.setdefault(patient_name, []).append(prescription)
             QMessageBox.information(self, "Рецепт", f"Рецепт для {patient_name} выписан: {prescription}")
             self.prescription_input.clear()

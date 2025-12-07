@@ -18,14 +18,12 @@ class RegistrarWindow(QWidget):
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
 
-        # Кнопка создать отчет по записям на текущую неделю
         self.report_btn = QPushButton("Создать отчёт за текущую неделю")
         self.report_btn.setFont(QFont("Arial",18))
         self.report_btn.setStyleSheet("background-color:#4CAF50; color:white; padding:10px; border-radius:10px;")
         self.report_btn.clicked.connect(self.create_weekly_report)
         layout.addWidget(self.report_btn)
 
-        # Список пациентов для записи на анализы
         self.patient_list = QListWidget()
         self.patient_list.setFont(QFont("Arial",16))
         layout.addWidget(self.patient_list)
@@ -47,7 +45,6 @@ class RegistrarWindow(QWidget):
 
     def update_patient_list(self):
         self.patient_list.clear()
-        # Список всех пациентов, у которых есть записи
         patients_set = set()
         for (date, doctor), lst in appointments.items():
             for r in lst:
@@ -58,8 +55,8 @@ class RegistrarWindow(QWidget):
     def create_weekly_report(self):
         from datetime import datetime, timedelta
         today = QDate.currentDate()
-        start_of_week = today.addDays(-today.dayOfWeek()+1)  # Понедельник
-        end_of_week = start_of_week.addDays(6)  # Воскресенье
+        start_of_week = today.addDays(-today.dayOfWeek()+1) 
+        end_of_week = start_of_week.addDays(6) 
 
         report_lines = []
         for (date_str, doctor), lst in appointments.items():
@@ -78,7 +75,6 @@ class RegistrarWindow(QWidget):
         if not item:
             return
         patient_name = item.text()
-        # Добавим поле 'lab_tests' к записи пациента
         for (date, doctor), lst in appointments.items():
             for r in lst:
                 if r["patient"] == patient_name:

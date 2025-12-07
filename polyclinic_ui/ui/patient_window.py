@@ -77,21 +77,48 @@ class PatientWindow(QWidget):
         date = self.calendar.selectedDate().toString("yyyy-MM-dd")
         specialty = self.specialty_select.currentText()
         doctor_name = self.doctor_select.currentText()
+
         slots = [f"{h:02d}:{m:02d}" for h in range(8,16) for m in (0,30)]
+
         booked = [r["time"] for r in appointments.get((date, doctor_name),[])]
         free_slots = [s for s in slots if s not in booked]
+
         if not free_slots:
             QMessageBox.information(self,"Нет мест","На выбранный день всё занято!")
             return
-        time = free_slots[0]
-        appointments.setdefault((date, doctor_name), []).append({
-            "patient": self.patient_name,
-            "time": time,
-            "specialization": specialty,
-            "doctor_name": doctor_name
-        })
-        self.update_appointments_view()
-        QMessageBox.information(self,"Успешно",f"Вы записаны к {doctor_name} на {date} в {time}")
+
+        from PyQt5.QtWidgets import QDialog, QListWidget, QVBoxLayout, QPushButton
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Выберите время")
+        dialog.setModal(True)
+        dialog.resize(400, 300)
+
+        layout = QVBoxLayout()
+
+        time_list = QListWidget()
+        for slot in free_slots[:10]:  
+            time_list.addItem(slot)
+        layout.addWidget(time_list)
+
+        ok_btn = QPushButton("Записаться")
+        ok_btn.clicked.connect(dialog.accept)
+        layout.addWidget(ok_btn)
+
+        dialog.setLayout(layout)
+        dialog.exec_()
+
+        if dialog.result() == QDialog.Accepted:
+            selected_item = time_list.currentItem()
+            if selected_item:
+                time = selected_item.text()
+                appointments.setdefault((date, doctor_name), []).append({
+                    "patient": self.patient_name,
+                    "time": time,
+                    "specialization": specialty,
+                    "doctor_name": doctor_name
+                })
+                self.update_appointments_view()
+                QMessageBox.information(self,"Успешно",f"Вы записаны к {doctor_name} на {date} в {time}")
 
     def update_appointments_view(self):
         self.app_list.clear()
@@ -117,11 +144,11 @@ class PatientWindow(QWidget):
             QMessageBox.information(self,"Ошибка","У вас нет выписанных рецептов!")
             return
         bought = []
-        for med in medicines[:]:  # Копия списка, чтобы безопасно удалять
+        for med in medicines[:]: 
             if INVENTORY.get(med,0) > 0:
-                INVENTORY[med] -= 1  # уменьшаем на складе
+                INVENTORY[med] -= 1 
                 bought.append(med)
-                medicines.remove(med)  # убираем из рецептов
+                medicines.remove(med) 
         if bought:
             QMessageBox.information(self,"Куплено","Вы купили: "+", ".join(bought))
         else:

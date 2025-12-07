@@ -8,18 +8,16 @@ class RoleSelectWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Поликлиника — Выбор роли")
-        self.showFullScreen()  # Открываем на весь экран
+        self.showFullScreen()  
 
         layout = QVBoxLayout(self)
         layout.setAlignment(Qt.AlignCenter)
 
-        # Заголовок
         label = QLabel("Добро пожаловать в нашу Поликлинику!\nВыберите свою роль:")
         label.setFont(QFont("Arial", 32, QFont.Bold))
         label.setStyleSheet("color: #004d80; margin-bottom: 50px;")
         label.setAlignment(Qt.AlignCenter)
 
-        # Кнопка Доктор
         doctor_button = QPushButton("🩺 Доктор")
         doctor_button.setFont(QFont("Arial", 24, QFont.Bold))
         doctor_button.setStyleSheet("""

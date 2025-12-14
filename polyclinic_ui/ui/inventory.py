@@ -5,5 +5,4 @@ INVENTORY = {
     "Цитрамон": 20
 }
 
-#Рецепты
 PRESCRIPTIONS = {}

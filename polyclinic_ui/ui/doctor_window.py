@@ -29,7 +29,6 @@ class DoctorWindow(QWidget):
         self.note_edit.setPlaceholderText("Заметка о пациенте / Диагноз / Лечение")
         layout.addWidget(self.note_edit)
 
-        # Добавляем поле рецепта
         self.prescription_input = QLineEdit()
         self.prescription_input.setFont(QFont("Arial",16))
         self.prescription_input.setPlaceholderText("Выписать рецепт (название лекарства)")
